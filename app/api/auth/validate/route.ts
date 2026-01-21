@@ -24,7 +24,11 @@ export async function POST(request: NextRequest) {
     }
 
     const client = getScalekitClient();
-    const claims = await client.validateToken(session.tokens.access_token) as TokenClaims;
+    const claims = await client.validateToken(session.tokens.access_token) as {
+      sub?: string;
+      email?: string;
+      name?: string;
+    };
 
     return NextResponse.json({
       valid: true,
