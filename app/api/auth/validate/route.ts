@@ -5,6 +5,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getScalekitClient } from '@/lib/scalekit';
 import { getSession } from '@/lib/cookies';
 
+interface TokenClaims {
+  sub: string;
+  email?: string;
+  name?: string;
+  [key: string]: any;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const session = getSession();
